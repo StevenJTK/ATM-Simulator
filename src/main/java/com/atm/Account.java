@@ -3,7 +3,7 @@ package com.atm;
 public class Account {
     private final String accountNumber;
     private final String pin;
-    private final double balance;
+    private double balance;
 
     public Account(String accountNumber, double initialBalance, String pin) {
         validateAccountNumber(accountNumber);
@@ -60,5 +60,8 @@ public class Account {
                 "accountNumber='" + accountNumber + '\'' +
                 ", balance=" + balance +
                 '}';
+    }
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

@@ -1,11 +1,13 @@
 package com.atm;
 
+import java.util.Scanner;
+
 public class ATMMachine {
     private static final String NO_AUTHENTICATED_USER_MSG = "No authenticated user";
 
     private final Bank bank;
     private Account currentAccount;
-
+    Scanner scanner = new Scanner(System.in);
     public ATMMachine(Bank bank) {
         if (bank == null) {
             throw new IllegalArgumentException("Bank cannot be null");
@@ -40,4 +42,18 @@ public class ATMMachine {
     public boolean isAuthenticated() {
         return currentAccount != null;
     }
+
+    public double deposit() {
+        Account account = new Account("123456", 1000.0,"1234");
+        System.out.println("Ange hur mycket du vill sätta in:");
+//        String input = scanner.nextLine();
+        double amount = 10.0;
+        if(amount <= 0 ) {
+            throw new IllegalArgumentException("Amount should be greater than 0");
+        }
+        double balance = account.getBalance();
+        account.setBalance(balance + amount);
+        return account.getBalance();
+    }
+
 }

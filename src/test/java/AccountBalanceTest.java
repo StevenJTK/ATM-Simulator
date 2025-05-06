@@ -1,15 +1,21 @@
 import com.atm.ATMMachine;
 import com.atm.Account;
+import com.atm.Balance;
 import com.atm.Bank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import java.util.Scanner;
 public class AccountBalanceTest {
     private Bank bank;
     private ATMMachine atm;
     private Account account;
+    Scanner scanner = new Scanner(System.in);
 
 
     @BeforeEach
@@ -79,5 +85,16 @@ public class AccountBalanceTest {
         assertThrows(IllegalStateException.class, () -> {
             atm.checkBalance();
         }, "Should throw exception when checking balance after logout");
+    }
+    @Test
+    void totalBalance() {
+        Balance balance = new Balance (new ArrayList<>());
+        assertEquals(100.0, balance.checkTotal());
+    }
+
+    @Test
+    void depositTest() {
+        double balance = atm.deposit();
+        assertEquals(990.0, balance);
     }
 }
