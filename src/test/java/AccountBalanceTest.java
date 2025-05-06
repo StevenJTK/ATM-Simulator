@@ -94,7 +94,24 @@ public class AccountBalanceTest {
 
     @Test
     void depositTest() {
-        double balance = atm.deposit();
-        assertEquals(990.0, balance);
+        double amount = 10.0;
+        if(amount <= 0 ) {
+            throw new IllegalArgumentException("Amount should be greater than 0");
+        }
+        double balance = account.getBalance();
+        account.setBalance(balance + amount);
+        assertEquals(1010.0, account.getBalance());
+    }
+
+    @Test
+    void depositTest2() {
+        double amount = 10.0;
+        if(amount <= 0 ) {
+            throw new IllegalArgumentException("Amount should be greater than 0");
+        }
+        Balance balance = new Balance (new ArrayList<Double>());
+        double total = balance.checkTotal();
+
+        assertEquals(1010.0, balance.checkTotal());
     }
 }

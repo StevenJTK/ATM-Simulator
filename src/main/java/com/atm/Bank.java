@@ -3,7 +3,8 @@ package com.atm;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Bank { private final Map<String, Account> accounts;
+public class Bank {
+    private final Map<String, Account> accounts;
 
     public Bank() {
         this.accounts = new HashMap<>();

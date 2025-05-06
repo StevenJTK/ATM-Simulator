@@ -43,17 +43,16 @@ public class ATMMachine {
         return currentAccount != null;
     }
 
-    public double deposit() {
-        Account account = new Account("123456", 1000.0,"1234");
+    public void deposit(Account account) {
         System.out.println("Ange hur mycket du vill sätta in:");
-//        String input = scanner.nextLine();
-        double amount = 10.0;
+        String input = scanner.nextLine();
+        double amount = Double.parseDouble(input);
         if(amount <= 0 ) {
             throw new IllegalArgumentException("Amount should be greater than 0");
         }
         double balance = account.getBalance();
         account.setBalance(balance + amount);
-        return account.getBalance();
+        //return account.getBalance();
     }
 
 }

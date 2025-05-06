@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Bank bank = new Bank();
-        bank.addAccount(new Account("123456", 1000.0, "1234"));
+        Account account = new Account("123456", 1000.0, "1234");
+        bank.addAccount(account);
         Balance balance = new Balance(new ArrayList<>());
 
 
@@ -22,12 +23,14 @@ public class Main {
 
         if (atm.authenticateUser(accountNumber, pin)) {
             System.out.println("Inloggning lyckades!");
-            System.out.println("Ditt saldo: " + balance.getTotal());
+            System.out.println("Ditt saldo: " + atm.checkBalance());
 
-            System.out.print("Ange belopp att ta ut: ");
-            double amount = scanner.nextDouble();
+            atm.deposit(account);
 
-            System.out.println("Ditt saldo: " + balance.getTotal());
+
+//            System.out.println("Ditt saldo: " + totalBalance);
+
+            System.out.println("Ditt saldo: " + atm.checkBalance());
 
         } else {
             System.out.println("Ditt kontonummer eller PIN var felaktig");
