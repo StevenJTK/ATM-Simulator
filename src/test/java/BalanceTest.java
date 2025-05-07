@@ -29,4 +29,14 @@ public class BalanceTest {
         assertEquals(100.0, balance.getBalance());
     }
 
+
+    @Test
+    void insertDeposit() {
+        List<Double> balances = new ArrayList<>();
+        Balance balance = new Balance(balances);
+        balance.deposit(100.0);
+        assertEquals(50.0, balance.getBalance());
+
+
+    }
 }

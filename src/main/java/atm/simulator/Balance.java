@@ -12,19 +12,32 @@ public class Balance {
 
     // Fetches total balance and displays values
     public double getBalance() {
-            if(balances.isEmpty())
-                return 0.0;
+        if(balances.isEmpty())
+            return 0.0;
         return getTotal();
     }
 
     // Checks value of balance
     public double getTotal() {
-    double total = 0.0;
-    for (double b: balances) {
-        if (b > 0) { // Removes negative numbers
-        total += b;
+        double total = 0.0;
+        for (double b: balances) {
+            if (b > 0) { // Removes negative numbers
+                total += b;
+            }
         }
-    }
         return total;
     }
+
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balances.add(amount);
+        } else {
+            System.out.println("Invalid amount.");
+        }
+    }
+
+
+
 }
+
