@@ -21,19 +21,31 @@ public class Balance {
     public double getTotal() {
         double total = 0.0;
         for (double b: balances) {
-            if (b > 0) { // Removes negative numbers
-                total += b;
+            total += b;
             }
-        }
         return total;
     }
 
 
     public void deposit(double amount) {
-        if (amount > 0) {
+        if (amount >= 0) {
             balances.add(amount);
         } else {
             System.out.println("Invalid amount.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0) {
+            double currentBalance = getBalance();
+
+            if (currentBalance >= amount) {
+                balances.add(-amount);
+            } else {
+                System.out.println("Not enough funds to withdraw.");
+            }
+        } else {
+            System.out.println("Invalid withdraw amount.");
         }
     }
 

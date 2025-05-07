@@ -24,7 +24,7 @@ public class BalanceTest {
 
     @Test
     public void checkIfValuesArePassed() {
-        List<Double> balances = List.of(100.0);
+        List<Double> balances = new ArrayList<>();
         Balance balance = new Balance(balances);
         assertEquals(100.0, balance.getBalance());
     }
@@ -35,8 +35,36 @@ public class BalanceTest {
         List<Double> balances = new ArrayList<>();
         Balance balance = new Balance(balances);
         balance.deposit(100.0);
-        assertEquals(50.0, balance.getBalance());
+        assertEquals(100.0, balance.getBalance());
 
 
     }
+
+    @Test
+    void withdrawAmount() {
+        List<Double> balances = new ArrayList<>();
+        Balance balance = new Balance(balances);
+        balance.withdraw(20.0);
+        assertEquals(50.0, balance.getBalance());
+    }
+
+    @Test
+    void withdrawAmountWithFundsInWallet() {
+        List<Double> balances = new ArrayList<>();
+        Balance balance = new Balance(balances);
+        balance.withdraw(20.0);
+        assertEquals(50.0, balance.getBalance());
+
+    }
+
+    @Test
+    void depositAndThenWithdrawAmount() {
+        List<Double> balances = new ArrayList<>();
+        Balance balance = new Balance(balances);
+        balance.deposit(20.0);
+        balance.withdraw(10.0);
+        assertEquals(10.0, balance.getBalance());
+    }
+
 }
+
