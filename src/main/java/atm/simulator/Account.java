@@ -3,15 +3,13 @@ package atm.simulator;
 public class Account {
     private final String accountNumber;
     private final String pin;
-    private double balance;
 
-    public Account(String accountNumber, double initialBalance, String pin) {
+
+    public Account(String accountNumber, String pin) {
         validateAccountNumber(accountNumber);
         validatePin(pin);
-        validateBalance(initialBalance);
 
         this.accountNumber = accountNumber;
-        this.balance = initialBalance;
         this.pin = pin;
     }
 
@@ -33,18 +31,9 @@ public class Account {
         }
     }
 
-    private void validateBalance(double balance) {
-        if (balance < 0) {
-            throw new IllegalArgumentException("Balance cannot be negative");
-        }
-    }
-
     public String getAccountNumber() {
-        return accountNumber;
-    }
 
-    public double getBalance() {
-        return balance;
+        return accountNumber;
     }
 
     public boolean verifyPin(String inputPin) {
@@ -58,10 +47,6 @@ public class Account {
     public String toString() {
         return "Account{" +
                 "accountNumber='" + accountNumber + '\'' +
-                ", balance=" + balance +
                 '}';
-    }
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 }

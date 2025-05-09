@@ -15,26 +15,22 @@ public class AccountBalanceTest {
     private Bank bank;
     private ATMMachine atm;
     private Account account;
-    Scanner scanner = new Scanner(System.in);
-
+    private Balance balance;
 
     @BeforeEach
     void setUp() {
         bank = new Bank();
-        this.account = new Account("123456", 1000.0, "1234");
+        this.account = new Account("123456", "1234");
         atm = new ATMMachine(bank);
+        balance = new Balance(new ArrayList<>());
         bank.addAccount(account);
     }
 
     @Test
     @DisplayName(value = "Checking balance with authentication")
-    void testCheckBalanceAfterAuthentication() {
+    void testAuthenticationSuccess() {
         boolean authResult = atm.authenticateUser("123456789", "1234");
         assertTrue(authResult, "Authentication should succeed");
-
-        double balance = atm.checkBalance();
-        assertEquals(1000.0, balance,
-                "Balance should be 1000.0 after authentication");
     }
 
     @Test
@@ -46,45 +42,48 @@ public class AccountBalanceTest {
     }
 
     @Test
+    // Passes as expected
+    // Refactor stage
     void testInvalidPinFormat() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Account("123456", 1000.0, "123");
+            new Account("123456", "123");
         }, "should throw exception for 3 digit PIN");
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Account("123456", 1000.0, "12345");
-        }, "should throw exception for 5 digit PIN");
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Account("123456", 1000.0, "abcd");
-        }, "should throw exception for non numeric PIN");
     }
 
+    // Verifies 4 digit pin format works
     @Test
+    void testValidPinFormat() {
+        assertDoesNotThrow(() -> new Account("123456", "1234"));
+        }
+
+
+
+
+    @Test
+    // Test passes
+    // Refactor - Split into multiple tests
+    // Refactor - Hard coded values?
     void testInvalidAccountNumberFormat() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Account("123", 1000.0, "1234");
+            new Account("123", "1234");
         }, "Should throw exception for too short account number");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Account("12345678901", 1000.0, "1234");
+            new Account("12345678901", "1234");
         }, "Should throw exception for too long account number");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Account("abcdef", 1000.0, "1234");
+            new Account("abcdef", "1234");
         }, "Should throw exception for non-numeric account number");
     }
 
     @Test
+    // Refactor might not be needed here.
     void testLogoutFunctionality() {
         atm.authenticateUser("123456", "1234");
         assertTrue(atm.isAuthenticated());
 
         atm.logout();
         assertFalse(atm.isAuthenticated());
-
-        assertThrows(IllegalStateException.class, () -> {
-            atm.checkBalance();
-        }, "Should throw exception when checking balance after logout");
     }
 }

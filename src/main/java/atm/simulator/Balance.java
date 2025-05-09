@@ -48,8 +48,5 @@ public class Balance {
             System.out.println("Invalid withdraw amount.");
         }
     }
-
-
-
 }
 
