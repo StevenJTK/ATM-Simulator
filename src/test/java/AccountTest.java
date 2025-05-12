@@ -7,11 +7,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.Scanner;
-public class AccountBalanceTest {
+
+public class AccountTest {
     private Bank bank;
     private ATMMachine atm;
     private Account account;
@@ -29,7 +28,7 @@ public class AccountBalanceTest {
     @Test
     @DisplayName(value = "Checking balance with authentication")
     void testAuthenticationSuccess() {
-        boolean authResult = atm.authenticateUser("123456789", "1234");
+        boolean authResult = atm.authenticateUser("123456", "1234");
         assertTrue(authResult, "Authentication should succeed");
     }
 
@@ -42,12 +41,10 @@ public class AccountBalanceTest {
     }
 
     @Test
-    // Passes as expected
-    // Refactor stage
     void testInvalidPinFormat() {
         assertThrows(IllegalArgumentException.class, () -> {
             new Account("123456", "123");
-        }, "should throw exception for 3 digit PIN");
+        }, "Expecting throw exception for 3 digit PIN");
     }
 
     // Verifies 4 digit pin format works
@@ -56,29 +53,25 @@ public class AccountBalanceTest {
         assertDoesNotThrow(() -> new Account("123456", "1234"));
         }
 
-
-
-
     @Test
-    // Test passes
-    // Refactor - Split into multiple tests
-    // Refactor - Hard coded values?
     void testInvalidAccountNumberFormat() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Account("123", "1234");
-        }, "Should throw exception for too short account number");
+        String[][] invalidAccountNumbers = {
+                {"123", "This is too short."},
+                {"12345645633", "This is too long."},
+                {"dhvtd", "This is an invalid format."}
+        };
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Account("12345678901", "1234");
-        }, "Should throw exception for too long account number");
+        for(String[] invalidFormat: invalidAccountNumbers) {
+            String accountNumber = invalidFormat[0];
+            String description = invalidFormat[1];
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Account("abcdef", "1234");
-        }, "Should throw exception for non-numeric account number");
+            assertThrows(IllegalArgumentException.class, () -> {
+                new Account(accountNumber, "1234");
+            }, "Expecting throw exception for: " + description);
+        }
     }
 
     @Test
-    // Refactor might not be needed here.
     void testLogoutFunctionality() {
         atm.authenticateUser("123456", "1234");
         assertTrue(atm.isAuthenticated());
@@ -87,3 +80,5 @@ public class AccountBalanceTest {
         assertFalse(atm.isAuthenticated());
     }
 }
+
+

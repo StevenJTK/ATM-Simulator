@@ -16,7 +16,7 @@ public class BalanceTest {
     }
 
     @Test
-    public void totalBalance2() {
+    public void checkTotalBalance() {
         Balance balance = new Balance(new ArrayList<>());
         balance.getBalance();
         assertEquals(0, balance.getBalance());

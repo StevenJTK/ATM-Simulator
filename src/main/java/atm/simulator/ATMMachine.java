@@ -37,6 +37,7 @@ public class ATMMachine {
     }
 
     public void logout() {
+
         currentAccount = null;
     }
 
