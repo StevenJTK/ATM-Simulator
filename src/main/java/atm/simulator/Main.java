@@ -22,12 +22,7 @@ public class Main {
         System.out.println("Would you like to withdraw?");
         balance.withdraw(scanner.nextDouble());
         System.out.println("Your total balance is: " + balance.getBalance());
-
-
-
-
-
-
+        System.out.println("Thank you for using STI Bank");
 
     }
 }
