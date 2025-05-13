@@ -26,4 +26,14 @@ public class ReceiptTest {
         assertNotNull(receipts, "Receipts folder should not be null");
         assertTrue(receipts.length > 0, "Receipt file should be created after withdrawal");
     }
+
+
+
+
+
+
+
+
 }
+
+

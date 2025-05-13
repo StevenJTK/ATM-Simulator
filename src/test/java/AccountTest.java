@@ -19,7 +19,7 @@ public class AccountTest {
     @BeforeEach
     void setUp() {
         bank = new Bank();
-        this.account = new Account("123456", "1234");
+        this.account = new Account("123456", 200.0, "1234");
         atm = new ATMMachine(bank);
         balance = new Balance(new ArrayList<>());
         bank.addAccount(account);
@@ -43,14 +43,15 @@ public class AccountTest {
     @Test
     void testInvalidPinFormat() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Account("123456", "123");
+            new Account("123456", 200.0, "1234");
         }, "Expecting throw exception for 3 digit PIN");
     }
 
     // Verifies 4 digit pin format works
     @Test
     void testValidPinFormat() {
-        assertDoesNotThrow(() -> new Account("123456", "1234"));
+
+        assertDoesNotThrow(() -> new Account("123456", 200.0, "1234"));
         }
 
     @Test
@@ -66,7 +67,7 @@ public class AccountTest {
             String description = invalidFormat[1];
 
             assertThrows(IllegalArgumentException.class, () -> {
-                new Account(accountNumber, "1234");
+                new Account(accountNumber, 200.0, "1234");
             }, "Expecting throw exception for: " + description);
         }
     }
