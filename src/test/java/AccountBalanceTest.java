@@ -1,4 +1,3 @@
-import atm.simulator.Balance;
 import atm.simulator.Bank;
 import atm.simulator.Account;
 import atm.simulator.ATMMachine;
@@ -6,11 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Scanner;
+
 public class AccountBalanceTest {
     private Bank bank;
     private ATMMachine atm;
@@ -33,8 +31,7 @@ public class AccountBalanceTest {
         assertTrue(authResult, "Authentication should succeed");
 
         double balance = atm.checkBalance();
-        assertEquals(1000.0, balance,
-                "Balance should be 1000.0 after authentication");
+        assertEquals(1000.0, balance, "Balance should be 1000.0 after authentication");
     }
 
     @Test

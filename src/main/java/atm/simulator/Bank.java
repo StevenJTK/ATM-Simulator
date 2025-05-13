@@ -31,4 +31,10 @@ public class Bank {
         Account account = findAccount(accountNumber);
         return account != null && account.verifyPin(pin);
     }
+
+    public Account createAccount(String id, double balance) {
+        Account acc = new Account(id, balance, "1234");
+        this.accounts.put(id, acc);
+        return acc;
+    }
 }

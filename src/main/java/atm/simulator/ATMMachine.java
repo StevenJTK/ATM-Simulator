@@ -8,6 +8,7 @@ public class ATMMachine {
     private final Bank bank;
     private Account currentAccount;
     Scanner scanner = new Scanner(System.in);
+
     public ATMMachine(Bank bank) {
         if (bank == null) {
             throw new IllegalArgumentException("Bank cannot be null");
@@ -47,12 +48,10 @@ public class ATMMachine {
         System.out.println("Ange hur mycket du vill sätta in:");
         String input = scanner.nextLine();
         double amount = Double.parseDouble(input);
-        if(amount <= 0 ) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("Amount should be greater than 0");
         }
         double balance = account.getBalance();
         account.setBalance(balance + amount);
-        //return account.getBalance();
     }
-
 }

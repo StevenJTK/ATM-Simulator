@@ -12,7 +12,6 @@ public class BalanceTest {
     public void totalBalance() {
         Balance balance = new Balance(new ArrayList<>());
         assertEquals(100.0, balance.getBalance());
-
     }
 
     @Test
@@ -29,15 +28,12 @@ public class BalanceTest {
         assertEquals(100.0, balance.getBalance());
     }
 
-
     @Test
     void insertDeposit() {
         List<Double> balances = new ArrayList<>();
         Balance balance = new Balance(balances);
         balance.deposit(100.0);
         assertEquals(100.0, balance.getBalance());
-
-
     }
 
     @Test
@@ -54,7 +50,6 @@ public class BalanceTest {
         Balance balance = new Balance(balances);
         balance.withdraw(20.0);
         assertEquals(50.0, balance.getBalance());
-
     }
 
     @Test
@@ -65,6 +60,4 @@ public class BalanceTest {
         balance.withdraw(10.0);
         assertEquals(10.0, balance.getBalance());
     }
-
 }
-

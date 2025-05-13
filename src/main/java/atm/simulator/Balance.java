@@ -1,4 +1,5 @@
 package atm.simulator;
+
 import java.util.List;
 
 public class Balance {
@@ -12,7 +13,7 @@ public class Balance {
 
     // Fetches total balance and displays values
     public double getBalance() {
-        if(balances.isEmpty())
+        if (balances.isEmpty())
             return 0.0;
         return getTotal();
     }
@@ -20,9 +21,9 @@ public class Balance {
     // Checks value of balance
     public double getTotal() {
         double total = 0.0;
-        for (double b: balances) {
+        for (double b : balances) {
             total += b;
-            }
+        }
         return total;
     }
 
@@ -48,8 +49,4 @@ public class Balance {
             System.out.println("Invalid withdraw amount.");
         }
     }
-
-
-
 }
-
