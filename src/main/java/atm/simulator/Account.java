@@ -4,16 +4,19 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Account {
     private final String accountNumber;
     private final String pin;
     private double balance;
 
+    Balance bal = new Balance(new ArrayList<>());
+
     public Account(String accountNumber, double initialBalance, String pin) {
         validateAccountNumber(accountNumber);
         validatePin(pin);
-        validateBalance(initialBalance);
+        bal.validateBalance(initialBalance);
 
         this.accountNumber = accountNumber;
         this.balance = initialBalance;
@@ -38,19 +41,10 @@ public class Account {
         }
     }
 
-    private void validateBalance(double balance) {
-        if (balance < 0) {
-            throw new IllegalArgumentException("Balance cannot be negative");
-        }
-    }
-
     public String getAccountNumber() {
         return accountNumber;
     }
 
-    public double getBalance() {
-        return balance;
-    }
 
     public boolean verifyPin(String inputPin) {
         if (inputPin == null) {
@@ -67,9 +61,7 @@ public class Account {
                 '}';
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
+
 
     public void withdraw(double amount) {
         if (amount <= balance) {

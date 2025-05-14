@@ -48,5 +48,11 @@ public class Balance {
             System.out.println("Invalid withdraw amount.");
         }
     }
+
+    void validateBalance(double balance) {
+        if (balance < 0) {
+            throw new IllegalArgumentException("Balance cannot be negative");
+        }
+    }
 }
 

@@ -1,5 +1,6 @@
 package atm.simulator;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ATMMachine {
@@ -7,7 +8,9 @@ public class ATMMachine {
 
     private final Bank bank;
     private Account currentAccount;
-    Scanner scanner = new Scanner(System.in);
+    Balance bal = new Balance(new ArrayList<>());
+
+
     public ATMMachine(Bank bank) {
         if (bank == null) {
             throw new IllegalArgumentException("Bank cannot be null");
@@ -26,7 +29,7 @@ public class ATMMachine {
 
     public double checkBalance() {
         verifyAuthenticatedUser();
-        return currentAccount.getBalance();
+        return bal.getBalance();
     }
 
     private void verifyAuthenticatedUser() {
@@ -41,16 +44,5 @@ public class ATMMachine {
 
     public boolean isAuthenticated() {
         return currentAccount != null;
-    }
-
-    public void deposit(Account account) {
-        System.out.println("Ange hur mycket du vill sätta in:");
-        String input = scanner.nextLine();
-        double amount = Double.parseDouble(input);
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Amount should be greater than 0");
-        }
-        double balance = account.getBalance();
-        account.setBalance(balance + amount);
     }
 }
