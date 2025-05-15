@@ -6,7 +6,6 @@ public class Bank {
     private final Map<String, atm.simulator.Account> accounts;
 
     public Bank() {
-
         this.accounts = new HashMap<>();
     }
 

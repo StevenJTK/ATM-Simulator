@@ -7,9 +7,9 @@ public class Start {
     Balance balance = new Balance(new ArrayList<>());
     Account acc = new Account("123456", 200.0, "1234");
     Scanner sc = new Scanner(System.in);
+    Bank bank = new Bank();
 
     boolean running = true;
-
 
     public void startProgram() throws InterruptedException {
 

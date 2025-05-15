@@ -1,9 +1,4 @@
 package atm.simulator;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Account {
@@ -56,38 +51,5 @@ public class Account {
 
     public double getBalance() {
         return bal.getBalance();
-    }
-
-
-    public void withdraw(double amount) {
-        if (amount <= balance) {
-            balance -= amount;
-            generateReceipt(amount);
-        } else {
-            System.out.println("Insufficient funds");
-        }
-    }
-
-    public void generateReceipt(double amount) {
-        try {
-            File receiptDir = new File("receipts");
-            if (!receiptDir.exists()) {
-                receiptDir.mkdir();
-            }
-
-            String filename = "receipts/" + accountNumber;
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-
-            // Allt innehåll för kvittot
-            writer.write("=== Receipt ===\n");
-            writer.write("Transaction: Withdrawal\n");
-            writer.write("Amount: " + amount + "\n");
-            writer.write("Balance: " + balance + "\n");
-            writer.close();
-
-            System.out.println(filename);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
