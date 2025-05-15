@@ -5,10 +5,9 @@ import java.util.Scanner;
 
 public class Start {
     Balance balance = new Balance(new ArrayList<>());
-    Bank bank = new Bank();
-    ATMMachine atm = new ATMMachine(bank);
     Account acc = new Account("123456", 200.0, "1234");
     Scanner sc = new Scanner(System.in);
+
     boolean running = true;
 
 
@@ -21,15 +20,19 @@ public class Start {
             System.out.println("Your account has been successfully verified.");
 
         } else {
-            System.out.println("Wrong pin.");
+            System.out.println("Wrong pin. Try again.");
         }
-
+        // Implement fix when invalid input, return a statement rather than crashing
         while (running) {
-            System.out.println("You can deposit, withdraw or exit.");
+            System.out.println("You can check your balance, deposit, withdraw or exit.");
 
             String input = sc.nextLine();
             switch(input) {
-                case "deposit":
+                case "balance", "Balance":
+                    System.out.println("Your total balance is: " + balance.getBalance());
+                    break;
+
+                case "deposit", "Deposit":
                     System.out.println("How much would you like to deposit?");
                     balance.deposit(sc.nextDouble());
                     sc.nextLine();
@@ -38,7 +41,7 @@ public class Start {
                     Thread.sleep(1000);
                     break;
 
-                case "withdraw":
+                case "withdraw", "Withdraw":
                     System.out.println("How much would you like to withdraw?");
                     balance.withdraw(sc.nextDouble());
                     sc.nextLine();
@@ -47,12 +50,10 @@ public class Start {
                     Thread.sleep(1000);
                     break;
 
-                case "exit":
+                case "exit", "Exit":
                     System.out.println("Thank you for using STI Bank!");
                     running = false;
-
             }
-
         }
     }
 }

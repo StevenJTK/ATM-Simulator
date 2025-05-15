@@ -47,7 +47,6 @@ public class AccountTest {
         }, "Expecting throw exception for 3 digit PIN");
     }
 
-    // Verifies 4 digit pin format works
     @Test
     void testValidPinFormat() {
         assertDoesNotThrow(() -> new Account("123456",2000.0,"1234"));

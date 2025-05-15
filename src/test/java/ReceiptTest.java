@@ -1,6 +1,10 @@
-import atm.simulator.Account;
-import org.junit.jupiter.api.*;
+import atm.simulator.Balance;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ReceiptTest {
@@ -9,31 +13,32 @@ public class ReceiptTest {
     public void cleanReceiptsFolder() {
         File dir = new File("receipts");
         if (dir.exists()) {
-            for (File file : dir.listFiles()) {
-                file.delete(); // Rensa gamla kvitton
+            File[] files = dir.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    file.delete();
+                }
             }
         }
     }
 
     @Test
     public void testReceiptIsGeneratedAfterWithdrawal() {
-        Account account = new Account("123456", 1000, "1234");
-        account.withdraw(200);
+
+        List<Double> transactions = new ArrayList<>();
+        transactions.add(1000.0);  // initial deposit
+        Balance balance = new Balance(transactions);
+
+
+        balance.withdraw(200);
+        balance.printReceipt();
 
         File receiptDir = new File("receipts");
-        File[] receipts = receiptDir.listFiles((dir, name) -> name.startsWith("123456"));
+        File receiptFile = new File(receiptDir, "receipt.txt");
 
-        assertNotNull(receipts, "Receipts folder should not be null");
-        assertTrue(receipts.length > 0, "Receipt file should be created after withdrawal");
+        assertTrue(receiptFile.exists(), "Receipt file should be created after withdrawal");
     }
-
-
-
-
-
-
-
-
 }
+
 
 

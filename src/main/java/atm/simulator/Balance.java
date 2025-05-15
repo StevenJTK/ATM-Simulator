@@ -1,31 +1,34 @@
 package atm.simulator;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Balance {
 
     private final List<Double> balances;
 
-    // Holds total balance in account
     public Balance(List<Double> balances) {
         this.balances = balances;
     }
 
-    // Fetches total balance and displays values
     public double getBalance() {
-        if(balances.isEmpty())
+        if (balances.isEmpty())
             return 0.0;
         return getTotal();
     }
 
-    // Checks value of balance
-    public double getTotal() {
+    private double getTotal() {
         double total = 0.0;
-        for (double b: balances) {
+        for (double b : balances) {
             total += b;
-            }
+        }
         return total;
     }
-
 
     public void deposit(double amount) {
         if (amount >= 0) {
@@ -41,6 +44,7 @@ public class Balance {
 
             if (currentBalance >= amount) {
                 balances.add(-amount);
+                printReceipt();
             } else {
                 System.out.println("Not enough funds to withdraw.");
             }
@@ -49,10 +53,43 @@ public class Balance {
         }
     }
 
-    void validateBalance(double balance) {
+    public void validateBalance(double balance) {
         if (balance < 0) {
             throw new IllegalArgumentException("Balance cannot be negative");
         }
     }
+
+    public void printReceipt() {
+        File folder = new File("receipts");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
+        File file = new File(folder, "receipt.txt");
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write("----- STI Bank Receipt -----\n");
+            writer.write("Transactions:\n");
+
+            for (Double b : balances) {
+                if (b >= 0) {
+                    writer.write(String.format("Deposit: $%.2f%n", b));
+                } else {
+                    writer.write(String.format("Withdrawal: $%.2f%n", -b));
+                }
+            }
+
+            writer.write(String.format("Current Balance: $%.2f%n", getBalance()));
+            writer.write("-----------------------------------\n");
+
+            System.out.println("Receipt saved at: " + file.getAbsolutePath());
+
+        } catch (IOException e) {
+            System.out.println("Failed to print receipt: " + e.getMessage());
+        }
+    }
+
 }
+
+
 

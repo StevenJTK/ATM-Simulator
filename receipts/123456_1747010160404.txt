@@ -1,5 +1,0 @@
-=== Receipt ===
-Date: 2025-05-12 02:36:00
-Transaction: Withdrawal
-Amount: 1.0
-Balance: 999.0

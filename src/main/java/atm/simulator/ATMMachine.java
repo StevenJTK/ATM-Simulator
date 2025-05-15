@@ -1,14 +1,11 @@
 package atm.simulator;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class ATMMachine {
     private static final String NO_AUTHENTICATED_USER_MSG = "No authenticated user";
 
     private final Bank bank;
     private Account currentAccount;
-    Balance bal = new Balance(new ArrayList<>());
+
 
 
     public ATMMachine(Bank bank) {
@@ -29,7 +26,7 @@ public class ATMMachine {
 
     public double checkBalance() {
         verifyAuthenticatedUser();
-        return bal.getBalance();
+        return currentAccount.getBalance();
     }
 
     private void verifyAuthenticatedUser() {

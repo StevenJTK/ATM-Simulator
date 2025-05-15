@@ -1,0 +1,9 @@
+----- ATM Transaction Receipt -----
+Date: 2025-05-15 10:56:29
+Transactions:
+  Deposit: $500,00
+  Withdrawal: $250,00
+Current Balance: $250,00
+Thank you for using our ATM!
+-----------------------------------
+

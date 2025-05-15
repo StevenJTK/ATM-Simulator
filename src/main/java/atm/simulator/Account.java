@@ -21,6 +21,7 @@ public class Account {
         this.accountNumber = accountNumber;
         this.balance = initialBalance;
         this.pin = pin;
+
     }
 
     private void validateAccountNumber(String accountNumber) {
@@ -53,14 +54,9 @@ public class Account {
         return this.pin.equals(inputPin);
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "accountNumber='" + accountNumber + '\'' +
-                ", balance=" + balance +
-                '}';
+    public double getBalance() {
+        return bal.getBalance();
     }
-
 
 
     public void withdraw(double amount) {
