@@ -18,7 +18,7 @@ public class BalanceTest {
     public void checkIfValuesArePassed() {
         List<Double> balances = new ArrayList<>();
         Balance balance = new Balance(balances);
-        assertEquals(100.0, balance.getBalance());
+        assertEquals(0.0, balance.getBalance());
     }
 
     @Test
@@ -42,6 +42,7 @@ public class BalanceTest {
     void withdrawAmountWithFundsInWallet() {
         List<Double> balances = new ArrayList<>();
         Balance balance = new Balance(balances);
+        balance.deposit(70.0);
         balance.withdraw(20.0);
         assertEquals(50.0, balance.getBalance());
     }
