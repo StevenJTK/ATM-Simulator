@@ -1,6 +1,6 @@
 ----- STI Bank Receipt -----
 Transactions:
-Deposit: $70,00
-Withdrawal: $20,00
-Current Balance: $50,00
+Deposit: $4342,00
+Withdrawal: $345,00
+Current Balance: $3997,00
 -----------------------------------
